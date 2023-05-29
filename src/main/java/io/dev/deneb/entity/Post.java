@@ -2,6 +2,8 @@ package io.dev.deneb.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -48,5 +50,16 @@ public class Post {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, content, createdAt);
+    }
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
+                .append("title", title)
+                .append("content", content)
+                .append("createdAt", createdAt)
+                .toString();
     }
 }

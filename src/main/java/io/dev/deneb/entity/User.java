@@ -1,7 +1,10 @@
 package io.dev.deneb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class User {
 
     private String name;
 
+    @JsonIgnore
     @OneToMany(fetch = LAZY, mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
 
@@ -42,5 +46,14 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+                .append("id", id)
+                .append("name", name)
+                .toString();
     }
 }
