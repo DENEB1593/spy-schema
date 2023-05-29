@@ -2,36 +2,51 @@ package io.dev.deneb.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Objects;
 
 @Entity
 @Table(name = "post")
-@Setter @Getter
+@Getter
 public class Post {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
+
     private String content;
+
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", updatable = false)
+    private User user;
 
     public Post() { }
 
-    public Post(String title, String content) {
-        this.title = title;
-        this.content = content;
-    }
 
-
-    public Post newPost(String title, String content) {
-        var post = new Post(title, content);
-        post.setCreatedAt(LocalDateTime.now(ZoneId.systemDefault()));
+    public static Post newPost(String title, String content, User user) {
+        var post = new Post();
+        post.title = title;
+        post.content = content;
+        post.createdAt = LocalDateTime.now(ZoneId.systemDefault());
+        post.user = user;
         return post;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Post post = (Post) o;
+        return Objects.equals(id, post.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, content, createdAt);
+    }
 }
