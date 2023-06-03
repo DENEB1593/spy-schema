@@ -1,4 +1,9 @@
 package io.dev.deneb.web.user;
 
-public record JoinResponse(Long id, String name) {
+import java.time.LocalDateTime;
+
+public record JoinResponse(
+        Long id,
+        String name,
+        LocalDateTime createdAt) {
 }

@@ -31,12 +31,12 @@ class UserControllerTest {
 
         var request = new JoinRequest("test");
 
-        ResultActions ra = mvc.perform(post("/api/users/join")
+        var ra = mvc.perform(post("/api/users/join")
                         .contentType(APPLICATION_JSON)
                         .content(JSON.toJSONString(request)))
                 .andExpect(status().isCreated());
 
-        JoinResponse response = JSON.parseObject(
+        var response = JSON.parseObject(
                 ra.andReturn().getResponse().getContentAsString(),
                 JoinResponse.class
         );
@@ -44,6 +44,7 @@ class UserControllerTest {
         assertThat(response).isNotNull();
         assertThat(response.name()).isNotNull();
         assertThat(response.id()).isNotNull();
+        assertThat(response.createdAt()).isNotNull();
 
 //                .andExpect(jsonPath("$.id").exists())
 //                .andExpect(jsonPath("$.name").exists());

@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +24,8 @@ public class User {
 
     private String name;
 
+    private LocalDateTime createdAt;
+
     @JsonIgnore
     @OneToMany(fetch = LAZY, mappedBy = "user")
     private List<Post> posts = new ArrayList<>();
@@ -32,6 +35,7 @@ public class User {
     public static User newUser(String name) {
         var user = new User();
         user.name = name;
+        user.createdAt = LocalDateTime.now();
         return user;
     }
 

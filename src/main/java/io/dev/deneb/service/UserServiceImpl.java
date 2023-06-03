@@ -25,13 +25,17 @@ public class UserServiceImpl implements UserService {
                 User.newUser(request.name())
         );
 
-        return new JoinResponse(user.getId(), user.getName());
+        return new JoinResponse(
+                user.getId(),
+                user.getName(),
+                user.getCreatedAt()
+        );
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Post> findPosts(Long id) {
-        User user = userRepository
+        final var user = userRepository
                 .findById(id)
                 .orElseThrow(() -> new RuntimeException("user not found"));
 
