@@ -1,4 +1,4 @@
-package io.dev.deneb;
+package io.dev.deneb.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TestConfig {
 
-    @Bean
-    public Jackson2ObjectMapperBuilderCustomizer jacksonCustomizer(){
-        return builder ->
-                builder.visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-    }
+//    @Bean
+//    public Jackson2ObjectMapperBuilderCustomizer jacksonCustomizer(){
+//        return builder ->
+//                builder.visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+//    }
 
 }
