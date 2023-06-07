@@ -19,7 +19,7 @@ public class ApplicationRunner implements CommandLineRunner {
     private final PostRepository postRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         User user = userRepository.save(User.newUser("deneb"));
 
